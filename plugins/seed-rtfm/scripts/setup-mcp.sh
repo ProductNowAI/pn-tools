@@ -5,7 +5,7 @@
 set -euo pipefail
 
 SERVER_NAME="productnow"
-SERVER_URL="https://api.productnow.com/mcp"
+SERVER_URL="https://api.productnow-prod.com/mcp"
 
 if claude mcp get "$SERVER_NAME" >/dev/null 2>&1; then
   exit 0

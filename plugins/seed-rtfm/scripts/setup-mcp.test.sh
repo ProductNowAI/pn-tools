@@ -35,7 +35,7 @@ echo "PASS: no-op when already registered"
 write_stub 1
 : > "$CALLS_LOG"
 PATH="$STUB_DIR:$PATH" CLAUDE_PLUGIN_OPTION_MCP_KEY="test-key" "$SETUP_SCRIPT"
-if ! grep -q "^mcp add --transport http productnow https://api.productnow.com/mcp --header Authorization: Bearer test-key$" "$CALLS_LOG"; then
+if ! grep -q "^mcp add --transport http productnow https://api.productnow-prod.com/mcp --header Authorization: Bearer test-key$" "$CALLS_LOG"; then
   echo "FAIL: setup-mcp.sh did not call 'claude mcp add' with the expected arguments" >&2
   cat "$CALLS_LOG" >&2
   exit 1
