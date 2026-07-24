@@ -1,0 +1,14 @@
+{
+  "name": "productnow",
+  "owner": {
+    "name": "ProductNow"
+  },
+  "description": "ProductNow-maintained Claude Code plugins",
+  "plugins": [
+    {
+      "name": "seed-rtfm",
+      "source": "./plugins/seed-rtfm",
+      "description": "Seeds a first-pass RTFM documentation corpus into ProductNow for the current repository"
+    }
+  ]
+}
