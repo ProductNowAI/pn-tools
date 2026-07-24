@@ -29,7 +29,7 @@ Usage: seed-rtfm.sh [options]   (run from the target repo's root)
 
 Options:
   --review        Stop after the plan phase so a human can edit .rtfm-seed/rtfm-plan.json; rerun to continue
-  --mcp-server S  ProductNow MCP server name in your Claude Code config (default productnow-staging)
+  --mcp-server S  ProductNow MCP server name in your Claude Code config (default productnow)
   --parallel N    Concurrent doc workers (default 3)
   --audience STR  Override the default audience statement in all prompts
   --dry-run       Everything except ProductNow writes; briefs land on disk for inspection
