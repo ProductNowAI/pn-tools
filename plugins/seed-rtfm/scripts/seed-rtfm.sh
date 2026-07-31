@@ -66,8 +66,9 @@ done
 # auth/enable problems still surface in the plan phase log.
 if [[ "$DRY_RUN" != 1 ]]; then
   claude mcp get "$MCP_SERVER" >/dev/null 2>&1 || {
-    echo "ERROR: MCP server '$MCP_SERVER' is not registered in the Claude Code config for $(pwd)." >&2
-    echo "Register it (claude mcp add --transport http $MCP_SERVER <url>), enable + authenticate it via /mcp in an interactive session, or pass --mcp-server <name>." >&2
+    echo "ERROR: MCP server '$MCP_SERVER' is not registered/authenticated (or pass --mcp-server <name> if it's under a different name)." >&2
+    echo "  OAuth: claude mcp add --transport http $MCP_SERVER <url>, then /mcp -> Authenticate" >&2
+    echo "  Key:   claude plugin enable seed-rtfm, then paste your key from Settings -> MCP" >&2
     exit 1
   }
 fi
