@@ -22,6 +22,9 @@ BASE_SHA=""
 # the same config `claude` would use interactively there. Must be enabled and
 # OAuth'd there; tool allowlists are derived from this name.
 MCP_SERVER="productnow"
+# Real prod URL, printed in the gate message below only when $MCP_SERVER is
+# still this default (matches the constant name/value in setup-mcp.sh).
+SERVER_URL="https://api.productnow-prod.com/mcp"
 
 usage() {
   cat <<'EOF'
@@ -66,8 +69,12 @@ done
 # auth/enable problems still surface in the plan phase log.
 if [[ "$DRY_RUN" != 1 ]]; then
   claude mcp get "$MCP_SERVER" >/dev/null 2>&1 || {
-    echo "ERROR: MCP server '$MCP_SERVER' is not registered/authenticated (or pass --mcp-server <name> if it's under a different name)." >&2
-    echo "  OAuth: claude mcp add --transport http $MCP_SERVER <url>, then /mcp -> Authenticate" >&2
+    echo "ERROR: MCP server '$MCP_SERVER' is not registered in the Claude Code config for $(pwd) (or pass --mcp-server <name> if it's under a different name)." >&2
+    if [[ "$MCP_SERVER" == "productnow" ]]; then
+      echo "  OAuth: claude mcp add --transport http $MCP_SERVER $SERVER_URL, then /mcp -> Authenticate" >&2
+    else
+      echo "  OAuth: claude mcp add --transport http $MCP_SERVER <url>, then /mcp -> Authenticate" >&2
+    fi
     echo "  Key:   claude plugin enable seed-rtfm, then paste your key from Settings -> MCP" >&2
     exit 1
   }

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Registers ProductNow's MCP server once, using the key the user pasted into
-# this plugin's userConfig at install/enable time. Safe to run on every
+# Registers ProductNow's MCP server once. Defaults to OAuth (the user runs
+# /mcp -> Authenticate); if a key was pasted into this plugin's userConfig at
+# install/enable time, registers with that key instead. Safe to run on every
 # SessionStart: a no-op once the server is registered.
 set -euo pipefail
 
