@@ -51,3 +51,19 @@ if grep -q "^mcp add" "$CALLS_LOG"; then
   exit 1
 fi
 echo "PASS: no-op when no key is present yet"
+
+# Case 4: server not registered and no key present -> printed message must mention BOTH auth paths.
+write_stub 1
+: > "$CALLS_LOG"
+OUTPUT="$(PATH="$STUB_DIR:$PATH" "$SETUP_SCRIPT" 2>&1)"
+if ! grep -q "claude mcp add --transport http productnow" <<<"$OUTPUT"; then
+  echo "FAIL: no-key message doesn't mention the OAuth (claude mcp add) path" >&2
+  echo "$OUTPUT" >&2
+  exit 1
+fi
+if ! grep -q "claude plugin enable seed-rtfm" <<<"$OUTPUT"; then
+  echo "FAIL: no-key message doesn't mention the key (claude plugin enable) path" >&2
+  echo "$OUTPUT" >&2
+  exit 1
+fi
+echo "PASS: no-key message mentions both OAuth and key paths"
