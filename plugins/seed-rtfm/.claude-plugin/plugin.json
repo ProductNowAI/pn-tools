@@ -10,9 +10,9 @@
     "mcp_key": {
       "type": "string",
       "title": "ProductNow MCP key",
-      "description": "Paste your ProductNow MCP key from Settings → MCP in the ProductNow app",
+      "description": "Optional — paste your ProductNow MCP key from Settings → MCP in the ProductNow app for non-interactive setup. Leave blank to authenticate via OAuth (/mcp) instead.",
       "sensitive": true,
-      "required": true
+      "required": false
     }
   }
 }
